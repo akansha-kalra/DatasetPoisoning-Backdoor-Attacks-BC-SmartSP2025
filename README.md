@@ -17,6 +17,11 @@ And activate it by
 $ conda activate bc_attack
 ```
 ## To create poisoned dataset ##
+Run the following command , 
+```console
+$ python3 poison_data.py
+```
+Note: The function add_trojan in poison_data.py defines the type of patch-by default it generates data posioned with Gaussian Patch . To generate poisoned data using red patch -uncomment line 31 and comment line 34. 
 ## To train BC model ##
 ## To reproduce our results for Test Time Trigger Attacks ##
 
