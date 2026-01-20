@@ -34,7 +34,7 @@ num_onpolicy_rollouts=int(args.num_rollouts)
 attack_budget=int(args.attack_budget)
 entropy_threshold = args.entropy_threshold
 attack_types_ls=args.attack_types_ls
-base_save_model_dir = args.save_model_dir
+base_save_model_dir = args.base_save_model_dir
 red_BC_policy_path = args.red_BC_policy_path
 gaussian_BC_policy_path = args.gaussian_BC_policy_path
 
