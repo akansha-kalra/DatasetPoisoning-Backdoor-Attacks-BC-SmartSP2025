@@ -452,6 +452,24 @@ def save_results(save_dir, type_attack, reward_dict, total_states_dict, attacked
     np.save(os.path.join(save_dir, f"{type_attack}_attack_attacked_state_idx_dict.npy"), attacked_idx_dict)
     np.save(os.path.join(save_dir, f"{type_attack}_episode_seed_dict.npy"), episode_seed_dict)
     print(f"[INFO] Saved results for {type_attack} attack in {save_dir}")
+def save_results_Unattacked(save_dir, patch_type, reward_dict, total_states_dict,episode_seed_dict):
+    np.save(os.path.join(save_dir, f"{patch_type}_Unattack_reward_dict.npy"), reward_dict)
+    np.save(os.path.join(save_dir, f"{patch_type}_Unattack_count_total_states_dict.npy"), total_states_dict)
+    np.save(os.path.join(save_dir, f"{patch_type}_Unattack_episode_seed_dict.npy"), episode_seed_dict)
+    print(f"[INFO] Saved results for {patch_type} Unattacked Eval in {save_dir}")
+
+def create_exp_dir(attack_budget, entropy_threshold, seed,num_onpolicy_rollouts,seq_halves2=False):
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    base_path= '/ethan/test_time_attack_runs/Fixed-TS-Fixed-Budget-Fixed-Sampling/'
+    if not os.path.exists(base_path):
+        os.makedirs(base_path)
+    # if not seq_halves2:
+    dir_name = f"New-TTT-5-percent-poisoned-budget_{attack_budget}_entropy_{entropy_threshold}_base_seed_{seed}_num_onpolicy_rollouts{num_onpolicy_rollouts}-env-v3-time{timestamp}"
+    curr_dir_path = os.path.join(base_path, dir_name)
+    if not os.path.exists(curr_dir_path):
+        os.makedirs(curr_dir_path, exist_ok=True)
+    print(f"[INFO] Created experiment dir: {curr_dir_path}")
+    return curr_dir_path
 
 if __name__ == '__main__':
     agent = PolicyNetwork()
