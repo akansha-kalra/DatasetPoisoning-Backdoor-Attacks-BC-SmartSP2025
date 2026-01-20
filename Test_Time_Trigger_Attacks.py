@@ -473,6 +473,49 @@ def create_exp_dir(attack_budget, entropy_threshold, seed,num_onpolicy_rollouts,
         os.makedirs(curr_dir_path, exist_ok=True)
     print(f"[INFO] Created experiment dir: {curr_dir_path}")
     return curr_dir_path
+def print_results_mean_standard_error(num_on_policy_rollouts,
+    eval_rewards_red, entropy_attack_reward_dict_red, random_attack_reward_dict_red,
+    eval_rewards_gaussian, entropy_attack_reward_dict_gaussian, random_attack_reward_dict_gaussian,
+    attack_budget, entropy_threshold):
+    # Compute mean rewards
+   
+    eval_mean_reward_red = np.mean(list(eval_rewards_red.values()))
+    entropy_mean_reward_red = np.mean(list(entropy_attack_reward_dict_red.values()))
+    random_mean_reward_red = np.mean(list(random_attack_reward_dict_red.values()))
+
+    
+    eval_mean_reward_gaussian = np.mean(list(eval_rewards_gaussian.values()))
+    entropy_mean_reward_gaussian = np.mean(list(entropy_attack_reward_dict_gaussian.values()))
+    random_mean_reward_gaussian = np.mean(list(random_attack_reward_dict_gaussian.values()))
+
+    # Compute standard error
+
+
+    def std_err(values):
+        return np.std(values) / np.sqrt(num_on_policy_rollouts) if len(values) > 1 else 0
+
+
+    red_errors = [
+        # std_err(eval_rewards_red),
+        std_err(list(eval_rewards_red.values())),
+        std_err(list(random_attack_reward_dict_red.values())),
+        std_err(list(entropy_attack_reward_dict_red.values()))
+    ]
+
+    gaussian_errors = [
+        # std_err(eval_rewards_gaussian),
+        std_err(list(eval_rewards_gaussian.values())),
+        std_err(list(random_attack_reward_dict_gaussian.values())),
+        std_err(list(entropy_attack_reward_dict_gaussian.values())) ]
+
+    print(f'Unattacked Mean for Red {np.round(eval_mean_reward_red,3)}, standard error {np.round(red_errors[0],3)}')
+    print(f'Random Attack Mean for Red {np.round(random_mean_reward_red,3)}, standard error {np.round(red_errors[1],3)}')
+    print(f'Entropy Attack Mean for Red {np.round(entropy_mean_reward_red,3)}, standard error {np.round(red_errors[2],3)}')
+    print('--'*15)
+    print(f'Unattacked Mean for Gaussian {np.round(eval_mean_reward_gaussian,3)}, standard error {np.round(gaussian_errors[0],3)}')
+    print(f'Random Attack Mean for Gaussian {np.round(random_mean_reward_gaussian,3)}, standard error {np.round(gaussian_errors[1],3)}')
+    print(f'Entropy Attack Mean for Gaussian {np.round(entropy_mean_reward_gaussian,3)}, standard error {np.round(gaussian_errors[2],3)}')
+
 
 if __name__ == '__main__':
       agent = PolicyNetwork()
