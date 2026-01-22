@@ -10,7 +10,7 @@
 # Environment setup
 Begin by installing our conda environment on a Linux machine with Nvidia GPU. On Ubuntu 22.04 ,
 ```console
-$ conda env create -f BC_attack_env.yml
+$ conda env create -f BC_attack_env.yaml
 ```
 And activate it by 
 ```console
