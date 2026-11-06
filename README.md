@@ -1,6 +1,6 @@
 # Dataset Poisoning Attacks on Behavioral Cloning Policies #
 <p align="center">
-  <a href="https:/arxiv.org/abs/2511.20992">View on ArXiv</a> |
+  <a href="https://arxiv.org/abs/2511.20992">View on ArXiv</a> |
   <a href="https://sites.google.com/view/dataset-poisoning-in-bc">Project Website</a>
 </p>
 
